@@ -1,0 +1,28 @@
+// grpc-tutorial-topic-service/proto/topic/topic.proto
+syntax = "proto3";
+package gprc.tutorial.topic;
+
+// ประกาศ service และ interface ซึ่งมี 2 ตัว สำหรับสร้างและเรียก topic
+service TopicService {
+  rpc CreateTopic(Topic) returns (Response) {}
+  rpc GetTopics(GetRequest) returns (Response) {}
+}
+
+// ประกาศ message type เป็น topic ที่ใช้งาน
+message Topic {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  int32 price = 4;
+  string category_id = 5;
+}
+
+// ประกาศ message type เป็นข้อมูล request ที่มาจาก client
+message GetRequest {}
+
+// ประกาศ message type เป็นข้อมูล response ที่ส่งกลับไป client
+message Response {
+  bool created = 1;
+  Topic topic = 2;
+  repeated Topic topics = 3;
+}
